@@ -7,7 +7,6 @@ var gulp = require('gulp');
 var concat = require("gulp-concat");
 var del = require('del');
 var file = require('gulp-file');
-var header = require('gulp-header');
 var html2js = require('gulp-ng-html2js');
 var jshint = require('gulp-jshint');
 var karma = require('gulp-karma');
@@ -232,35 +231,20 @@ gulp.task('build-dist', function () {
     return tpls.length > 0;
   });
 
-  var metaHeader = banner + meta.modules + '\n';
-
-  var dict = {
-    'srcModules': srcModules,
-    'tplModules': tplModules
-  };
-
   gulp.src('src/*/*.js')
     .pipe(concat(filename + '.js'))
-    .pipe(header(metaHeader, dict))
     .pipe(ngAnnotate())
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(dist))
     .pipe(uglify({mangle: false}))
-    .pipe(header(banner, dict))
     .pipe(rename({extname: '.min.js'}))
     .pipe(gulp.dest(dist));
 
-  var metaHeader = banner + 
-                   meta.all + '\n' +
-                   meta.tplmodules + '\n';
-
   gulp.src(['src/*/*.js', 'template/*/*.html.js'])
     .pipe(concat(filename + '-tpls.js'))
-    .pipe(header(metaHeader, dict))
     .pipe(ngAnnotate())
     .pipe(gulp.dest(dist))
     .pipe(uglify({mangle: false}))
-    .pipe(header(banner, dict))
     .pipe(rename({extname: '.min.js'}))
     .pipe(gulp.dest(dist));
 
