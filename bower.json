@@ -9,6 +9,7 @@
     }
   ],
   "description": "A lightweight, flexible, and tasty collection of reusable UI components for AngularJS.",
+  "main": "dist/ng-tasty-tpls.min.js",
   "devDependencies": {
     "angular": "^1.4.1",
     "angular-route": "^1.4.1",
