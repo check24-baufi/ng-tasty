@@ -287,9 +287,12 @@ angular.module('ngTasty.component.table', [
         }
       }
       $scope.pagination.pages = Math.ceil($scope.pagination.size / $scope.pagination.count);
+
       if ($scope.pagination.pages < $scope.pagination.page) {
         $scope.params.page = $scope.pagination.pages;
       }
+
+      $scope.params.page = $scope.pagination.page;
     }
   };
 
